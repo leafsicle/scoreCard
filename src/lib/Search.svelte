@@ -17,8 +17,8 @@
     placeholder="Search by course name "
   />
   <button on:click={() => toggleFilterDropdown(showSearchFilterDropdown)}
-    >Filter icon</button
-  >
+    >Filter
+  </button>
   {#if showSearchFilterDropdown}
     <p>
       <select multiple bind:value={amenities}>
