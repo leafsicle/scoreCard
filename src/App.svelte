@@ -1,13 +1,14 @@
 <script>
   import "chota";
+  import Router, { location } from "svelte-spa-router";
   let hidden = false;
   import { Confetti } from "svelte-confetti";
   import { darkmode } from "./lib/store.js";
   import Search from "./lib/Search.svelte";
-  import Card from "./lib/Card.svelte";
+  import Card from "./lib/CardComp.svelte";
   let nonsense = false;
   let courses = [
-    { id: 1, name: "Pebble Beach", par: 71, drivingRange: false },
+    { id: 1, name: "Pebble Beach", par: 71, drivingRange: true },
     { id: 2, name: "Sawgrass", par: 71, drivingRange: false },
     { id: 3, name: "portrush", par: 71, drivingRange: false },
     { id: 4, name: "pinehurst", par: 71, drivingRange: false },
@@ -22,16 +23,20 @@
 
 <nav class="nav">
   <div class="nav-left">
-    <a class="brand" href="/" title="logo">
+    <a class="brand" href="/#/" title="logo">
       <img src="src/assets/svelte.png" alt="" />
     </a>
   </div>
   <div class="nav-right">
-    <a title="logo" href="/">Profile</a>
-    <a title="logo" href="/">Stats</a>
+    <a title="logo" href="/#/">Profile</a>
+    <a title="logo" href="/#/">Stats</a>
   </div>
 </nav>
-
+<!-- <Router
+  routes={{
+    "/profile": Profile
+  }}
+  /> -->
 <main class="">
   <div class="test">
     <Search />
@@ -45,7 +50,7 @@
       <label for="nonsenseToggle">Nonsense?</label>
     </span>
   </div>
-
+  Where you are is {location}
   <!-- list of course sections -->
   {#each courses as course (course.id)}
     <Card {course} />
@@ -55,14 +60,24 @@
 </main>
 
 <style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  :global(:root) {
+    --color-primary: #14854f;
+    --color-lightGrey: #d2d6dd;
+    --color-grey: #747681;
+    --color-darkGrey: #3f4144;
+    --color-error: #d43939;
+    --color-success: #28bd14;
+    --grid-maxWidth: 120rem;
+    --grid-gutter: 2rem;
+    --font-size: 1.6rem;
+    --font-family: " -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
   main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 1rem;
   }
   nav {
     display: flex;
@@ -84,48 +99,27 @@
 
   @media (prefers-color-scheme: dark) {
     .dark-scheme {
-      background: #333;
-      color: white;
-    }
-    .dark-scheme {
-      background: black;
-      color: #ddd;
+      --bg-color: #000;
+      --bg-secondary-color: #131316;
+      --font-color: #f5f5f5;
+      --color-grey: #ccc;
+      --color-darkGrey: #777;
     }
   }
 
   @media (prefers-color-scheme: light) {
-    .light-scheme {
-      background: white;
-      color: #555;
-    }
     .light-scheme {
       background: #eee;
       color: black;
     }
   }
 
-  .day,
-  .night {
-    display: inline-block;
-    padding: 1em;
-    width: 7em;
-    height: 2em;
-    vertical-align: middle;
-  }
-  /* .dark {
-    --bg-color: #000;
-    --bg-secondary-color: #131316;
-    --font-color: #f5f5f5;
-    --color-grey: #ccc;
-    --color-darkGrey: #777;
-  } */
-  /* 
-  .glowing {
+  /* .nonsense.glowing {
     color: white;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-  }
+  } */
 
-  .bordered_text {
+  /* .bordered_text {
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   } */
