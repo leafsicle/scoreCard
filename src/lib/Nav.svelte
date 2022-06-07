@@ -1,9 +1,7 @@
 <script>
-  export let menu = 1;
 </script>
 
 <nav>
-  <ul id="menu">
     <li>
       <a href="/profile" on:click|preventDefault={() => (menu = 1)}>Profile</a>
     </li>
@@ -19,3 +17,4 @@
     </li>
   </ul>
 </nav>
+<!-- text-white -->

@@ -7,7 +7,6 @@
   export const modal_hide = event => (modal_open = false);
 </script>
 
-<Button on:click={modal_show}>Show modal</Button>
 <Modal bind:open={modal_open}>
   <Card>
     <h4 slot="header">{question}</h4>
